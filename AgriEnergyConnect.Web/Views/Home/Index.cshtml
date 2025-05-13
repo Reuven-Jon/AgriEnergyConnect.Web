@@ -1,0 +1,68 @@
+﻿
+@{
+    ViewData["Title"] = "Welcome to Agri-Energy Connect";
+}
+
+<style>
+    body {
+        
+        background-image: url('images\agri_energy_connect_logo.png');
+        background-size: contain;
+        background-blend-mode: lighten;
+        background-color: #f8f9fa;
+    }
+
+    .overlay {
+        background-color: rgba(255, 255, 255, 0.9);
+        padding: 3rem;
+        border-radius: 0.5rem;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    section {
+        margin-bottom: 4rem;
+    }
+
+    .contact-section {
+        background-color: #e9f7ef;
+        padding: 2rem;
+        border-radius: 0.5rem;
+    }
+</style>
+
+<div class="container mt-5">
+    <div class="overlay">
+        <section class="text-center">
+            <h1 class="display-4 text-success fw-bold">Agri-Energy Connect</h1>
+            <p class="lead">
+                Agri-Energy Connect is a digital platform committed to empowering sustainable agriculture through data-driven tools and green energy integration.
+                We connect farmers and employees to streamline operations, boost productivity, and promote eco-friendly practices.
+            </p>
+        </section>
+
+        <section>
+            <h2 class="text-primary">About the Application</h2>
+            <p>
+                This web application enables two types of users: <strong>Farmers</strong> and <strong>Employees</strong>.
+                After registering and logging in, users are directed to a role selection page where they can access functionality based on their role.
+            </p>
+            <ul>
+                <li><strong>Farmers</strong> can add and manage agricultural products by category, production date, and description.</li>
+                <li><strong>Employees</strong> can register new farmer profiles and view/filter products based on type or date range.</li>
+            </ul>
+            <p>
+                Our platform is responsive, secure, and optimized for use on desktops, tablets, and smartphones. All data is validated and stored securely in a relational database.
+            </p>
+        </section>
+
+        <section class="contact-section">
+            <h2 class="text-dark">Contact Us</h2>
+            <p>For inquiries, support, or feedback:</p>
+            <ul class="list-unstyled">
+                <li><strong>Email:</strong> contact@agrienergyconnect.com</li>
+                <li><strong>Phone:</strong> +27 12 345 6789</li>
+                <li><strong>Address:</strong> 123 Green Farm Way, Cape Town, South Africa</li>
+            </ul>
+        </section>
+    </div>
+</div>

@@ -1,0 +1,124 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+/* 1. Import a clean, professional font (you can swap for any you like) */
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;600;700&display=swap');
+
+/* 2. Define your palette as CSS variables */
+:root {
+    --green-light: #64E2B7;
+    --green-dark: #537D5D;
+    --tan-light: #D2D0A0;
+    --orange: #FF9F00;
+    --red: #CB0404;
+    --teal: #129990;
+    --black: #000000;
+    --forest: #3F7D58;
+    --gold: #DDA853;
+    --hotpink: #FF2DF1;
+    --aqua: #57B4BA;
+    --navy: #205781;
+    --sea: #2DAA9E;
+    /* Brand font stack */
+    --brand-font: 'Work Sans', sans-serif;
+}
+
+/* 3. Apply the brand font globally */
+body {
+    font-family: var(--brand-font);
+    color: var(--black);
+    background-color: #fff;
+}
+
+/* 4. Brand name styling */
+.navbar-brand {
+    font-weight: 700;
+    color: var(--green-light) !important;
+    font-size: 1.5rem;
+}
+
+/* 5. Navbar links */
+.navbar-nav .nav-link {
+    color: var(--forest);
+    font-weight: 600;
+}
+
+    .navbar-nav .nav-link:hover {
+        color: var(--sea);
+    }
+
+/* 6. Primary buttons */
+.btn-primary {
+    background-color: var(--orange);
+    border-color: var(--orange);
+    font-weight: 600;
+}
+
+    .btn-primary:hover,
+    .btn-primary:focus {
+        background-color: var(--gold);
+        border-color: var(--gold);
+    }
+
+/* 7. Secondary buttons (e.g. “Continue as Guest”) */
+.btn-outline-secondary {
+    color: var(--forest);
+    border-color: var(--forest);
+}
+
+    .btn-outline-secondary:hover {
+        background-color: var(--forest);
+        color: #fff;
+    }
+
+/* 8. Headings within cards/forms */
+.card h1,
+.card h2,
+.card h3 {
+    color: var(--navy);
+    font-weight: 600;
+}
+
+/* 9. Links */
+a {
+    color: var(--teal);
+}
+
+    a:hover {
+        color: var(--aqua);
+        text-decoration: none;
+    }
+
+/* 10. Form inputs focus ring */
+.form-control:focus {
+    border-color: var(--sea);
+    box-shadow: 0 0 0 .2rem rgba( 87,180,186, .25);
+}
+
+/* 11. Footer links */
+footer a {
+    color: var(--forest);
+}
+
+    footer a:hover {
+        color: var(--green-dark);
+    }

@@ -1,0 +1,26 @@
+﻿@{
+    ViewData["Title"] = "Login";
+}
+
+<div class="container">
+    <h2>Login</h2>
+
+    <form method="post">
+        <div>
+            <label>Username</label>
+            <input name="username" class="form-control" required minlength="10" />
+        </div>
+        <div>
+            <label>Password</label>
+            <input name="password" type="password" class="form-control" required pattern="(?=.*\d).{8,}" />
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">Login</button>
+        <a asp-controller="Home" asp-action="Index" class="btn btn-outline-secondary">Continue as Guest</a>
+
+    </form>
+
+    @if (!ViewData.ModelState.IsValid)
+    {
+        <div class="text-danger">Invalid login attempt.</div>
+    }
+</div>
