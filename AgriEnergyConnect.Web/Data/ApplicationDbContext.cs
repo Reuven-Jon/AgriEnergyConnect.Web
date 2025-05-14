@@ -21,23 +21,18 @@ namespace AgriEnergyConnect.Web.Data
         {
             base.OnModelCreating(builder);
 
-            // 1. Seed two farmers
+            // 0. Allow Product.ApplicationUserId to be empty for seeding
+            builder.Entity<Product>()
+                   .Property(p => p.ApplicationUserId)
+                   .IsRequired(false);
+
+            // 1. Seed Farmers
             builder.Entity<Farmer>().HasData(
-                new Farmer
-                {
-                    Id = 1,
-                    FullName = "Alice Green",
-                    Email = "alice@farm.co.za"
-                },
-                new Farmer
-                {
-                    Id = 2,
-                    FullName = "Bob Fields",
-                    Email = "bob@farm.co.za"
-                }
+                new Farmer { Id = 1, FullName = "Alice Green", Email = "alice@farm.co.za" },
+                new Farmer { Id = 2, FullName = "Bob Fields", Email = "bob@farm.co.za" }
             );
 
-            // 2. Seed a few products tied to those farmers
+            // 2. Seed Products (no need for ApplicationUserId)
             builder.Entity<Product>().HasData(
                 new Product
                 {
@@ -57,5 +52,6 @@ namespace AgriEnergyConnect.Web.Data
                 }
             );
         }
+
     }
 }
