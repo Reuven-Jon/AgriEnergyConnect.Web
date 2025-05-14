@@ -17,16 +17,45 @@ namespace AgriEnergyConnect.Web.Data
         // Data/ApplicationDbContext.cs
         public DbSet<ChatMessage> ChatMessages { get; set; }
 
-
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
 
-            builder.Entity<Product>()
-                   .HasOne<Farmer>()
-                   .WithMany(f => f.Products)
-                   .HasForeignKey(p => p.FarmerId)
-                   .OnDelete(DeleteBehavior.Cascade);
+            // 1. Seed two farmers
+            builder.Entity<Farmer>().HasData(
+                new Farmer
+                {
+                    Id = 1,
+                    FullName = "Alice Green",
+                    Email = "alice@farm.co.za"
+                },
+                new Farmer
+                {
+                    Id = 2,
+                    FullName = "Bob Fields",
+                    Email = "bob@farm.co.za"
+                }
+            );
+
+            // 2. Seed a few products tied to those farmers
+            builder.Entity<Product>().HasData(
+                new Product
+                {
+                    Id = 1,
+                    Name = "Sunflower Seeds",
+                    Category = "Grains",
+                    ProductionDate = new DateTime(2025, 1, 15),
+                    FarmerId = 1
+                },
+                new Product
+                {
+                    Id = 2,
+                    Name = "Organic Wheat",
+                    Category = "Grains",
+                    ProductionDate = new DateTime(2025, 2, 10),
+                    FarmerId = 2
+                }
+            );
         }
     }
 }
