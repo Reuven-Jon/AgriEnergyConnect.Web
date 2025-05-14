@@ -1,0 +1,91 @@
+﻿@model AgriEnergyConnect.Web.Models.ProductFilterViewModel
+
+@{
+    ViewData["Title"] = "Filter Products";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4 text-info">Filter Products</h2>
+
+    <!-- Filter Form -->
+    <div class="card mb-4 p-4">
+        <form asp-action="FilterProducts" method="post" class="row g-3">
+            @Html.AntiForgeryToken()
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+            <div class="col-md-3">
+                <label asp-for="FromDate" class="form-label">From Date</label>
+                <input asp-for="FromDate" class="form-control" />
+                <span asp-validation-for="FromDate" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-3">
+                <label asp-for="ToDate" class="form-label">To Date</label>
+                <input asp-for="ToDate" class="form-control" />
+                <span asp-validation-for="ToDate" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-3">
+                <label asp-for="Category" class="form-label">Category</label>
+                <select asp-for="Category" asp-items="Model.Categories" class="form-select">
+                    <option value="">— All —</option>
+                </select>
+            </div>
+
+            <div class="col-md-3">
+                <label asp-for="FarmerId" class="form-label">Farmer</label>
+                <select asp-for="FarmerId" asp-items="Model.Farmers" class="form-select">
+                    <option value="0">— All —</option>
+                </select>
+            </div>
+
+            <div class="col-12 text-end">
+                <button type="submit" class="btn btn-info btn-lg shadow-sm">
+                    Apply Filters
+                </button>
+                <a asp-action="Dashboard" class="btn btn-secondary btn-lg shadow-sm ms-2">
+                    Cancel
+                </a>
+            </div>
+        </form>
+    </div>
+
+    <!-- Results -->
+    @if (Model.Results.Any())
+    {
+        <div class="card p-4">
+            <h3 class="card-title mb-3">Filtered Products</h3>
+            <table class="table table-striped table-hover">
+                <thead class="bg-forest text-white">
+                    <tr>
+                        <th>Name</th>
+                        <th>Category</th>
+                        <th>Production Date</th>
+                        <th>Farmer</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var p in Model.Results)
+                    {
+                        <tr>
+                            <td>@p.Name</td>
+                            <td>@p.Category</td>
+                            <td>@p.ProductionDate:yyyy-MM-dd</td>
+                            <td>@p.Farmer?.FullName</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    else if (Model.Results != null)
+    {
+        <div class="alert alert-warning">
+            No products match your criteria.
+        </div>
+    }
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

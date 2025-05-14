@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using AgriEnergyConnect.Web.Data;
+using AgriEnergyConnect.Web.Hubs;          // for ChatHub
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -24,13 +25,16 @@ builder.Services
     .AddDefaultTokenProviders()
     .AddDefaultUI();
 
-// ───── 4) Razor Pages + MVC ─────
-builder.Services.AddRazorPages();
+// ───── 4) SignalR ─────
+builder.Services.AddSignalR();
+
+// ───── 5) MVC + Razor Pages ─────
 builder.Services.AddControllersWithViews();
+builder.Services.AddRazorPages();
 
 var app = builder.Build();
 
-// ───── 5) Middleware ─────
+// ───── 6) Middleware ─────
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
@@ -43,7 +47,10 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
-// ───── 6) Seed Roles if not exist ─────
+// ───── 7) Map your SignalR hubs ─────
+app.MapHub<ChatHub>("/chathub");
+
+// ───── 8) Seed Roles if not exist ─────
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
@@ -60,27 +67,29 @@ using (var scope = app.Services.CreateScope())
     }
 }
 
-// ───── 7) Default route goes to Login page ─────
+// ───── 9) Routes ─────
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}"
 );
+app.MapRazorPages();
 
-app.MapRazorPages(); // REQUIRED for /Areas Razor Pages
-
-// ───── 8) Force login before accessing app ─────
+// ───── 10) Force login before accessing app ─────
 app.Use(async (context, next) =>
 {
     var path = context.Request.Path;
+    var isPublic =
+     path.StartsWithSegments("/Identity/Account/Login")
+  || path.StartsWithSegments("/Identity/Account/Register")
+  || path.StartsWithSegments("/Login")                         // this line is required
+  || path.StartsWithSegments("/Register")                      // allow registration
+  || path.StartsWithSegments("/css")
+  || path.StartsWithSegments("/js")
+  || path.StartsWithSegments("/lib")
+  || path.StartsWithSegments("/images");
 
-    var isPublicPage = path.StartsWithSegments("/Identity/Account/Login")
-                    || path.StartsWithSegments("/Identity/Account/Register")
-                    || path.StartsWithSegments("/css")
-                    || path.StartsWithSegments("/js")
-                    || path.StartsWithSegments("/lib")
-                    || path.StartsWithSegments("/images");
 
-    if (!context.User.Identity.IsAuthenticated && !isPublicPage)
+    if (!context.User.Identity.IsAuthenticated && !isPublic)
     {
         context.Response.Redirect("/Identity/Account/Login");
         return;

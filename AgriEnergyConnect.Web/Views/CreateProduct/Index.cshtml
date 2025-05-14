@@ -9,18 +9,28 @@
 
 <h2 class="text-success mb-4">Create New Product</h2>
 
-<form asp-controller="Farmer"
-      asp-action="CreateProduct"
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
+
+<form asp-controller="CreateProduct"
+      asp-action="Index"
       method="post"
       class="shadow p-4 rounded bg-light">
 
+    @Html.AntiForgeryToken()
+    <div asp-validation-summary="All" class="text-danger mb-3"></div>
+
     <div class="mb-3">
         <label asp-for="Name" class="form-label">Product Name</label>
-        <input asp-for="Name" class="form-control" />
+        <input asp-for="Name" class="form-control" autofocus />
         <span asp-validation-for="Name" class="text-danger"></span>
     </div>
 
-    <div class="mb-3 row">
+    <div class="row mb-3">
         <div class="col">
             <label asp-for="Category" class="form-label">Category</label>
             <select asp-for="Category" class="form-select" required>
@@ -60,24 +70,32 @@
 
     <div class="mb-3">
         <label asp-for="Description" class="form-label">Description</label>
-        <textarea asp-for="Description" class="form-control"></textarea>
+        <textarea asp-for="Description" class="form-control" rows="3"></textarea>
         <span asp-validation-for="Description" class="text-danger"></span>
     </div>
 
     <button type="submit"
-            class="btn btn-success btn-lg w-100 shadow-sm"
+            class="btn btn-success btn-lg w-100"
             onmouseover="this.classList.add('shadow-lg')"
             onmouseout="this.classList.remove('shadow-lg')">
         Save Product
     </button>
+
+    <!-- NEW BACK BUTTON -->
+    <a asp-controller="FarmerDashboard"
+       asp-action="Dashboard"
+       class="btn btn-secondary btn-lg w-100 mt-2 shadow-sm">
+        ← Back to Farmer Dashboard
+    </a>
 </form>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
     <script>
+        // Show/hide the new farmer name input
         document.getElementById('farmerSelect')
             .addEventListener('change', function () {
-                var show = this.value === "0";
+                const show = this.value === "0";
                 document.getElementById('newFarmerDiv').style.display = show ? 'block' : 'none';
                 if (!show) {
                     document.getElementById('newFarmerName').value = '';

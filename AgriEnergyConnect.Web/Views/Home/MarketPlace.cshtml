@@ -1,0 +1,245 @@
+﻿Here’s your full Razor view with a supplier name and contact number under each product. I’ve just inserted these two lines after the price in every card:
+
+```cshtml
+@{
+    ViewData["Title"] = "Green Energy Marketplace";
+}
+
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+<div class="container mt-4">
+    <h1 class="mb-4">@ViewData["Title"]</h1>
+
+    <div class="row g-4">
+        <!-- Wind Turbine -->
+        <div class="col-md-6 col-lg-4">
+            <div class="card h-100">
+                <img src="https://atlas-content-cdn.pixelsquid.com/stock-images/offshore-wind-turbine-04Rm3R4-600.jpg"
+                     class="card-img-top"
+                     alt="Wind Turbine" />
+                <div class="card-body">
+                    <h5 class="card-title">Wind Turbine</h5>
+                    <p class="card-text">
+                        Offshore wind turbine generating renewable electricity.
+                        Suitable for medium to large-scale farms.
+                    </p>
+                    <p><strong>Price:</strong> R145,000</p>
+                    <p><strong>Supplier:</strong> @SupplierName()</p>
+                    <p><strong>Contact:</strong> @ContactNumber()</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Solar Panel -->
+        <div class="col-md-6 col-lg-4">
+            <div class="card h-100">
+                <img src="https://atlas-content-cdn.pixelsquid.com/stock-images/solar-panel-cell-lXNrGB6-600.jpg"
+                     class="card-img-top"
+                     alt="Solar Panel" />
+                <div class="card-body">
+                    <h5 class="card-title">Solar Panel</h5>
+                    <p class="card-text">
+                        High-efficiency solar panel. Provides clean energy
+                        to homes or off-grid farming operations.
+                    </p>
+                    <p><strong>Price:</strong> R12,500</p>
+                    <p><strong>Supplier:</strong> @SupplierName()</p>
+                    <p><strong>Contact:</strong> @ContactNumber()</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Water Mill -->
+        <div class="col-md-6 col-lg-4">
+            <div class="card h-100">
+                <img src="https://img.favpng.com/5/24/12/water-wheel-hydroelectricity-clip-art-png-favpng-1TsYjR7SgkxiYWS9CtHFUA6Yt.jpg"
+                     class="card-img-top"
+                     alt="Water Mill" />
+                <div class="card-body">
+                    <h5 class="card-title">Water Mill</h5>
+                    <p class="card-text">
+                        Traditional water wheel design for low-impact hydroelectric
+                        power in small rivers or streams.
+                    </p>
+                    <p><strong>Price:</strong> R38,000</p>
+                    <p><strong>Supplier:</strong> @SupplierName()</p>
+                    <p><strong>Contact:</strong> @ContactNumber()</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- BioGas Unit -->
+        <div class="col-md-6 col-lg-4">
+            <div class="card h-100">
+                <img src="https://cdn-icons-png.flaticon.com/512/2355/2355260.png"
+                     class="card-img-top"
+                     alt="BioGas Unit" />
+                <div class="card-body">
+                    <h5 class="card-title">BioGas Unit</h5>
+                    <p class="card-text">
+                        Converts organic farm waste into usable gas for heating
+                        or electricity. Compact and efficient.
+                    </p>
+                    <p><strong>Price:</strong> R24,750</p>
+                    <p><strong>Supplier:</strong> @SupplierName()</p>
+                    <p><strong>Contact:</strong> @ContactNumber()</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Monocrystalline Solar Panels -->
+        <div class="col-md-6 col-lg-4">
+            <div class="card h-100">
+                <img src="https://atlas-content-cdn.pixelsquid.com/stock-images/monocrystalline-solar-panels-cell-PO93E48-600.jpg"
+                     class="card-img-top"
+                     alt="Monocrystalline Panels" />
+                <div class="card-body">
+                    <h5 class="card-title">Monocrystalline Solar Panels</h5>
+                    <p class="card-text">
+                        Premium quality solar cells with high efficiency
+                        for commercial energy generation.
+                    </p>
+                    <p><strong>Price:</strong> R19,900</p>
+                    <p><strong>Supplier:</strong> @SupplierName()</p>
+                    <p><strong>Contact:</strong> @ContactNumber()</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Thin Film Solar Panels -->
+        <div class="col-md-6 col-lg-4">
+            <div class="card h-100">
+                <img src="https://offgridwizard.com/wp-content/uploads/2023/11/Thin-film-solar-modules.png"
+                     class="card-img-top"
+                     alt="Thin Film Panels" />
+                <div class="card-body">
+                    <h5 class="card-title">Thin Film Solar Panels</h5>
+                    <p class="card-text">
+                        Flexible, lightweight solar panels ideal for mobile
+                        or temporary setups.
+                    </p>
+                    <p><strong>Price:</strong> R9,200</p>
+                    <p><strong>Supplier:</strong> @SupplierName()</p>
+                    <p><strong>Contact:</strong> @ContactNumber()</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Gold Wind Turbine -->
+        <div class="col-md-6 col-lg-4">
+            <div class="card h-100">
+                <img src="https://atlas-content-cdn.pixelsquid.com/assets_v2/299/2991510999804155856/jpeg-600/G03.jpg?modifiedAt=1"
+                     class="card-img-top"
+                     alt="Gold Wind Turbine" />
+                <div class="card-body">
+                    <h5 class="card-title">Gold Wind Turbine</h5>
+                    <p class="card-text">
+                        Stylized wind turbine with gold accents. Fully functional
+                        and decorative.
+                    </p>
+                    <p><strong>Price:</strong> R165,000</p>
+                    <p><strong>Supplier:</strong> @SupplierName()</p>
+                    <p><strong>Contact:</strong> @ContactNumber()</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Flat Winged Turbine -->
+        <div class="col-md-6 col-lg-4">
+            <div class="card h-100">
+                <img src="https://thumbs.wbm.im/pw/small/33aef6ef1233f5f5cc8d2886774f5dcf.png"
+                     class="card-img-top"
+                     alt="Flat Winged Turbine" />
+                <div class="card-body">
+                    <h5 class="card-title">Flat Winged Turbine</h5>
+                    <p class="card-text">
+                        Innovative blade design optimizes wind capture at lower altitudes.
+                    </p>
+                    <p><strong>Price:</strong> R132,000</p>
+                    <p><strong>Supplier:</strong> @SupplierName()</p>
+                    <p><strong>Contact:</strong> @ContactNumber()</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tree Shaped Wind Turbine -->
+        <div class="col-md-6 col-lg-4">
+            <div class="card h-100">
+                <img src="https://static.vecteezy.com/system/resources/thumbnails/012/808/659/small_2x/wind-energy-power-png.png"
+                     class="card-img-top"
+                     alt="Tree Wind Turbine" />
+                <div class="card-body">
+                    <h5 class="card-title">Tree Shaped Wind Turbine</h5>
+                    <p class="card-text">
+                        Blends into the environment. Ideal for urban renewable energy applications.
+                    </p>
+                    <p><strong>Price:</strong> R88,500</p>
+                    <p><strong>Supplier:</strong> @SupplierName()</p>
+                    <p><strong>Contact:</strong> @ContactNumber()</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- High Speed River Watermill -->
+        <div class="col-md-6 col-lg-4">
+            <div class="card h-100">
+                <img src="https://img.favpng.com/0/13/7/water-wheel-watermill-electric-generator-engine-generator-png-favpng-LsbFR9Jv4zx1JkRgBPBQCXhpn.jpg"
+                     class="card-img-top"
+                     alt="River Watermill" />
+                <div class="card-body">
+                    <h5 class="card-title">High Speed River Watermill</h5>
+                    <p class="card-text">
+                        Engineered for fast-flowing streams to generate continuous off-grid energy.
+                    </p>
+                    <p><strong>Price:</strong> R54,000</p>
+                    <p><strong>Supplier:</strong> @SupplierName()</p>
+                    <p><strong>Contact:</strong> @ContactNumber()</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Old School Watermill -->
+        <div class="col-md-6 col-lg-4">
+            <div class="card h-100">
+                <img src="https://e7.pngegg.com/pngimages/989/257/png-clipart-windmill-watermill-mill-s-angle-building-thumbnail.png"
+                     class="card-img-top"
+                     alt="Old School Watermill" />
+                <div class="card-body">
+                    <h5 class="card-title">Old School Watermill</h5>
+                    <p class="card-text">
+                        Classic watermill design adds character while delivering steady power output.
+                    </p>
+                    <p><strong>Price:</strong> R31,500</p>
+                    <p><strong>Supplier:</strong> @SupplierName()</p>
+                    <p><strong>Contact:</strong> @ContactNumber()</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@functions {
+    private static readonly string[] names = {
+        "EcoTech Solutions", "GreenGrid SA", "WindForce Ltd.", "SolarSavvy",
+        "TurbineTech Africa", "HydroDrive Systems", "RenewGen Power",
+        "UrbanEco Ltd.", "Sunwise Energy", "FutureVolt Co.",
+        "GreenWheel SA", "RiverCurrent Solutions"
+    };
+
+    private static readonly string[] phones = {
+        "021 555 1234", "011 789 4523", "087 654 3210", "012 345 6789",
+        "031 234 5678", "041 567 8901", "076 888 1122", "083 444 5566",
+        "074 321 9988", "078 123 4567", "060 432 7890", "082 556 3344"
+    };
+
+    private static int _index;
+
+    public static string SupplierName()
+        => names[(_index++) % names.Length];
+
+    public static string ContactNumber()
+        => phones[(_index++) % phones.Length];
+}
+```

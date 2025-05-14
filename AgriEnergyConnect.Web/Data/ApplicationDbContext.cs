@@ -14,6 +14,9 @@ namespace AgriEnergyConnect.Web.Data
         public DbSet<AppUser> Users { get; set; }
         public DbSet<Category> Categories { get; set; }
 
+        // Data/ApplicationDbContext.cs
+        public DbSet<ChatMessage> ChatMessages { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

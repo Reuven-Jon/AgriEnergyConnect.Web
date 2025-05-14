@@ -1,7 +1,67 @@
 ﻿@{
     ViewData["Title"] = "Employee Dashboard";
 }
-<h2>Employee Dashboard</h2>
-<a href="/Employee/RegisterFarmer" class="btn btn-primary">Register Farmer</a>
-<a href="/Employee/FilterProducts" class="btn btn-info">Filter Products</a>
+<!-- GREETING MODAL -->
+<div class="modal fade" id="greetingModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Welcome to Employee Dashboard</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p>Click “Add Farmer” to register a new farmer, or use the filters to view products.</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" data-bs-dismiss="modal">Got It!</button>
+            </div>
+        </div>
+    </div>
+</div>
 
+<div class="container mt-4">
+    <h2 class="mb-4 text-primary">Employee Dashboard</h2>
+
+    <div class="row g-3">
+        <div class="col-md-6">
+            <a class="btn btn-primary btn-lg w-100 shadow"
+               asp-controller="EmployeeDashboard"
+               asp-action="RegisterFarmer">
+                Register Farmer
+            </a>
+        </div>
+        <div class="col-md-6">
+            <a class="btn btn-info btn-lg w-100 text-white shadow"
+               asp-controller="EmployeeDashboard"
+               asp-action="FilterProducts">
+                Filter Products
+            </a>
+        </div>
+        <div class="col-md-6">
+            <a class="btn btn-success btn-lg w-100 shadow"
+               asp-controller="EmployeeDashboard"
+               asp-action="AllProducts">
+                View All Products
+            </a>
+        </div>
+        <div class="col-md-6">
+            <a class="btn btn-warning btn-lg w-100 shadow"
+               asp-controller="EmployeeDashboard"
+               asp-action="ExportReport">
+                Export Report
+            </a>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @* any existing scripts *@
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+          var modal = new bootstrap.Modal(
+            document.getElementById('greetingModal')
+          );
+          modal.show();
+        });
+    </script>
+}

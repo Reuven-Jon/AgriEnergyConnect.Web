@@ -1,0 +1,67 @@
+﻿@model AgriEnergyConnect.Web.Models.Farmer
+
+@{
+    ViewData["Title"] = "Register Farmer";
+}
+
+<div class="container mt-4">
+    <h2 class="text-primary mb-4">Register New Farmer</h2>
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            @TempData["SuccessMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    <form asp-controller="EmployeeDashboard"
+          asp-action="RegisterFarmer"
+          method="post"
+          class="shadow p-4 rounded bg-light">
+
+        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+        <div class="mb-3">
+            <label asp-for="FullName" class="form-label">Full Name</label>
+            <input asp-for="FullName" class="form-control" />
+            <span asp-validation-for="FullName" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Email" class="form-label">Email</label>
+            <input asp-for="Email" type="email" class="form-control" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="PhoneNumber" class="form-label">Phone Number</label>
+            <input asp-for="PhoneNumber" class="form-control" />
+            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Address" class="form-label">Address</label>
+            <textarea asp-for="Address" class="form-control" rows="3"></textarea>
+            <span asp-validation-for="Address" class="text-danger"></span>
+        </div>
+
+        <div class="d-grid gap-2">
+            <button type="submit"
+                    class="btn btn-primary btn-lg shadow-sm"
+                    onmouseover="this.classList.add('shadow-lg')"
+                    onmouseout="this.classList.remove('shadow-lg')">
+                Register Farmer
+            </button>
+            <a asp-controller="EmployeeDashboard"
+               asp-action="Dashboard"
+               class="btn btn-secondary btn-lg shadow-sm">
+                Cancel
+            </a>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

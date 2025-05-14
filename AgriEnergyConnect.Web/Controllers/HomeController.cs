@@ -8,5 +8,18 @@ namespace AgriEnergyConnect.Web.Controllers
         {
             return View(); // This will render Views/Home/Index.cshtml
         }
+        // Controllers/HomeController.cs
+        public IActionResult Privacy()
+            => RedirectToAction("Index", "Chat");
+        public IActionResult LearnMore()
+   => View();
+
+        public IActionResult MarketPlace()
+        {
+            return View();
+        }
+
+
+
     }
 }

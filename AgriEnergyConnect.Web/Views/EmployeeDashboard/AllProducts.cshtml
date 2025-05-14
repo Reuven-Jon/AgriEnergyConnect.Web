@@ -1,0 +1,41 @@
+﻿@model IEnumerable<AgriEnergyConnect.Web.Models.Product>
+
+@{
+    ViewData["Title"] = "All Products";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4 text-success">All Products</h2>
+
+    <div class="mb-3">
+        <a asp-controller="EmployeeDashboard"
+           asp-action="Dashboard"
+           class="btn btn-secondary btn-sm shadow-sm">
+            ← Back to Dashboard
+        </a>
+    </div>
+
+    <div class="card p-4">
+        <table class="table table-striped table-hover">
+            <thead class="bg-forest text-white">
+                <tr>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>Production Date</th>
+                    <th>Farmer</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var product in Model)
+                {
+                    <tr>
+                        <td>@product.Name</td>
+                        <td>@product.Category</td>
+                        <td>@product.ProductionDate:yyyy-MM-dd</td>
+                        <td>@product.Farmer?.FullName</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

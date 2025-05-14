@@ -122,3 +122,54 @@ footer a {
     footer a:hover {
         color: var(--green-dark);
     }
+
+/* 1. Button hover lift + shadow */
+.btn {
+    transition: transform .2s ease-out, box-shadow .2s ease-out;
+}
+
+    .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, .08);
+    }
+
+/* 2. Nav-link hover color shift */
+.nav-link {
+    transition: color .2s ease-out;
+}
+
+    .nav-link:hover {
+        color: var(--sea) !important; /* your accent colour */
+    }
+
+/* 3. Accordion toggle chevron rotate */
+.accordion-button {
+    position: relative;
+    transition: background-color .2s ease-out;
+}
+
+    .accordion-button::after {
+        transition: transform .2s ease-out;
+    }
+
+    .accordion-button:not(.collapsed)::after {
+        transform: rotate(90deg);
+    }
+
+    /* 4. Focus states (keyboard nav) */
+    .btn:focus,
+    .nav-link:focus,
+    .accordion-button:focus {
+        box-shadow: 0 0 0 .2rem rgba(87,180,186,.25);
+        outline: none;
+    }
+
+.accordion-collapse {
+    transition: height .3s ease, opacity .3s ease;
+    opacity: 0;
+}
+
+    .accordion-collapse.show {
+        opacity: 1;
+    }
+

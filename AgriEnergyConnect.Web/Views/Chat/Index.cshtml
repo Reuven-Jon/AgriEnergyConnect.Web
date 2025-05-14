@@ -1,0 +1,179 @@
+﻿@model IList<AgriEnergyConnect.Web.Models.ChatMessage>
+
+@{
+    ViewData["Title"] = "Hub";
+}
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      rel="stylesheet" />
+
+<style>
+    .chat-container {
+      max-width: 600px;
+      margin: auto;
+      display: flex; flex-direction: column;
+      height: calc(100vh - 100px);
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .messages {
+      flex: 1;
+      padding: 1rem;
+      overflow-y: auto;
+      background: #f9f9f9;
+    }
+    .msg {
+      margin-bottom: .75rem;
+    }
+    .msg .user {
+      font-weight: 600;
+    }
+    .msg .time {
+      font-size: .75rem;
+      color: #666;
+      margin-left: .5rem;
+    }
+    .input-group {
+      display: flex;
+      border-top: 1px solid #ddd;
+    }
+    #messageInput {
+      flex: 1;
+      border: none;
+      padding: .75rem;
+      font-size: 1rem;
+    }
+    #sendButton {
+      background: #28a745;
+      color: white;
+      border: none;
+      padding: 0 1rem;
+      cursor: pointer;
+    }
+    #sendButton:disabled {
+      background: #aaa;
+      cursor: not-allowed;
+    }
+</style>
+<!-- GREETING MODAL -->
+<div class="modal fade" id="greetingModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Welcome to the Hub</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <p>Type your message below and hit send to chat with everyone.</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary" data-bs-dismiss="modal">Got it!</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="chat-container">
+  <div id="messagesList" class="messages">
+    @foreach (var m in Model)
+    {
+      <div class="msg">
+        <span class="user">@m.UserName:</span>
+        <span class="text">@m.Text</span>
+        <span class="time">(@m.Timestamp:HH:mm)</span>
+      </div>
+    }
+  </div>
+
+  <div class="input-group">
+    <input id="messageInput" placeholder="Type your message…" />
+    <button id="sendButton">
+      <i class="fa fa-paper-plane"></i>
+    </button>
+  </div>
+</div>
+
+@section Scripts {
+<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.5/signalr.min.js"></script>
+
+  <script>
+  console.log("📡 Chat script loaded");
+
+  // cache DOM nodes
+  const messagesList = document.getElementById("messagesList");
+  const messageInput = document.getElementById("messageInput");
+  const sendButton   = document.getElementById("sendButton");
+
+  if (!messagesList || !messageInput || !sendButton) {
+    console.error("❌ Missing chat DOM elements:",
+      { messagesList, messageInput, sendButton }
+    );
+  }
+
+  // build & start SignalR
+  const connection = new signalR.HubConnectionBuilder()
+                         .withUrl("/chathub")
+                         .build();
+
+  connection.start()
+    .then(() => console.log("✅ SignalR connected"))
+    .catch(err => console.error("⚠️ SignalR error:", err));
+
+  // helper to append
+  function appendMessage(user, text, time) {
+    const msg = document.createElement("div");
+    msg.className = "msg";
+    msg.innerHTML = `
+      <span class="user">${user}:</span>
+      <span class="text">${text}</span>
+      <span class="time">(${time})</span>
+    `;
+    messagesList.append(msg);
+    msg.scrollIntoView();
+  }
+
+  // on incoming broadcast
+  connection.on("ReceiveMessage", (user, text, time) => {
+    console.log("⬅️ Received:", user, text, time);
+    appendMessage(user, text, time);
+  });
+
+  // send handler
+  sendButton.addEventListener("click", () => {
+    const text = messageInput.value.trim();
+    if (!text) return;
+
+    // show immediately
+    const now = new Date()
+              .toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
+    console.log("➡️ Sending:", text, now);
+    appendMessage('@User.Identity.Name', text, now);
+
+    // persist & broadcast
+    connection.invoke("SendMessage", '@User.Identity.Name', text)
+      .then(() => console.log("🗄️ Saved to server"))
+      .catch(err => console.error("❌ Invoke error:", err));
+
+    messageInput.value = "";
+  });
+    
+    document.addEventListener('DOMContentLoaded', () => {
+      var modal = new bootstrap.Modal(
+        document.getElementById('greetingModal')
+      );
+      modal.show();
+    });
+  
+
+  // enter key
+  messageInput.addEventListener("keyup", e => {
+    if (e.key === "Enter") sendButton.click();
+  });
+</script>
+}
+
+
+
+
+

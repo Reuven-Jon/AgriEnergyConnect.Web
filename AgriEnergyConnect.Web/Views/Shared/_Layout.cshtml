@@ -3,100 +3,123 @@
 @inject UserManager<IdentityUser> UserManager
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-100">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - AgriEnergyConnect.Web</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/AgriEnergyConnect.Web.styles.css" asp-append-version="true" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
-    @RenderSection("Styles", required: false)
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>@ViewData["Title"] – AgriEnergyConnect.Web</title>
+
+  <!-- Bootstrap + Icons -->
+  <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+  <link 
+    rel="stylesheet" 
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" 
+  />
+
+  <!-- Brand CSS -->
+  <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+  <link 
+    rel="stylesheet" 
+    href="~/AgriEnergyConnect.Web.styles.css" 
+    asp-append-version="true" 
+  />
+
+  @RenderSection("Styles", required: false)
 </head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-controller="Home" asp-action="Index">AgriEnergyConnect</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
 
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        @if (SignInManager.IsSignedIn(User))
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-controller="Home" asp-action="Index">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark"
-                                   asp-controller="FarmerDashboard"
-                                   asp-action="Dashboard">
-                                    Farmer Dashboard
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark"
-                                   asp-controller="EmployeeDashboard"
-                                   asp-action="Index">
-                                    Employee Dashboard
-                                </a>
-                            </li>
+<body class="d-flex flex-column h-100 bg-white">
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-light" 
+         style="background-color: var(--green-light);">
+      <div class="container">
+        <a class="navbar-brand p-0 me-4" asp-controller="Home" asp-action="Index">
+          <img src="~/Images/Agri_Energy_Connect_Logo.png" 
+               alt="AgriEnergyConnect Logo" 
+               style="height: 40px;" />
+        </a>
+        <button class="navbar-toggler border-0" type="button" 
+                data-bs-toggle="collapse" data-bs-target="#mainNav">
+          <i class="bi bi-list fs-2 text-dark"></i>
+        </button>
 
-                        }
-                    </ul>
+        <div class="collapse navbar-collapse" id="mainNav">
+          <!-- Left links -->
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0 gap-3">
+            @if (SignInManager.IsSignedIn(User))
+            {
+              <li class="nav-item">
+                <a class="nav-link text-dark text-uppercase fw-semibold" 
+                   asp-controller="Home" asp-action="Index">
+                  Home
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-dark text-uppercase fw-semibold" 
+                   asp-controller="Chat" asp-action="Index">
+                  Hub
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-dark text-uppercase fw-semibold" 
+                   asp-controller="FarmerDashboard" asp-action="Dashboard">
+                  Farmer Dashboard
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-dark text-uppercase fw-semibold" 
+                   asp-controller="EmployeeDashboard" asp-action="Dashboard">
+                  Employee Dashboard
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-dark text-uppercase fw-semibold" 
+                   asp-controller="Home" asp-action="LearnMore">
+                  Learn More
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-dark text-uppercase fw-semibold" 
+                   asp-controller="Home" asp-action="MarketPlace">
+                  Marketplace
+                </a>
+              </li>
+            }
+          </ul>
 
-                    <ul class="navbar-nav">
-                        @if (!SignInManager.IsSignedIn(User))
-                        {
-                            @* Only show login if not already on Login page *@
-                            @if (Context.Request.Path != "/Login")
-                            {
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-controller="Login" asp-action="Index">Login</a>
-                                </li>
-                            }
-                        }
-
-                        @* This handles "Hello user | Logout" *@
-                        <partial name="_LoginPartial" />
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2025 - AgriEnergyConnect.Web -
-            <a asp-controller="Home" asp-action="Privacy">Privacy</a>
+          <!-- Right side: login/profile -->
+          <ul class="navbar-nav ms-auto">
+            <partial name="_LoginPartial" />
+          </ul>
         </div>
-    </footer>
+      </div>
+    </nav>
+  </header>
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
-    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+  <main role="main" class="flex-fill container py-4">
+    @RenderBody()
+  </main>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
-            popoverTriggerList.forEach(function (el) {
-                new bootstrap.Popover(el);
-            });
-        });
-    </script>
+  <footer class="mt-auto border-top py-3">
+    <div class="container text-center small text-muted">
+      &copy; 2025 AgriEnergyConnect.Web |
+      <a asp-controller="Home" asp-action="Privacy" class="text-dark">
+        Privacy
+      </a>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="~/lib/jquery/dist/jquery.min.js"></script>
+  <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+  <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+  @await RenderSectionAsync("Scripts", required: false)
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      [...document.querySelectorAll('[data-bs-toggle="popover"]')]
+        .forEach(el => new bootstrap.Popover(el));
+    });
+  </script>
 </body>
 </html>

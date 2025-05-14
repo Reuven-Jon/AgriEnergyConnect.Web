@@ -16,8 +16,8 @@
         <ul class="navbar-nav ms-auto">
             <li class="nav-item">
                 <a class="btn btn-success nav-link text-white"
-                   asp-controller="Farmer"
-                   asp-action="CreateProduct">
+                   asp-controller="CreateProduct"
+                   asp-action="Index">
                     Add Product
                 </a>
             </li>
@@ -37,7 +37,7 @@
                 <p>Click “Add Product” to add new items, or click the info icon to view details.</p>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-primary" data-bs-dismiss="modal">Got it</button>
+                <button class="btn btn-primary" data-bs-dismiss="modal">Got it!</button>
             </div>
         </div>
     </div>
@@ -45,6 +45,14 @@
 
 <div class="container">
     <h2 class="mb-4">Farmer Dashboard</h2>
+
+    @if (ViewData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            @ViewData["SuccessMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
 
     <!-- Products Table -->
     <div class="card p-4" id="productsTable">

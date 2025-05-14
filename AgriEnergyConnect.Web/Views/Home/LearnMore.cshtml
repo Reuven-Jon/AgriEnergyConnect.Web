@@ -1,0 +1,107 @@
+﻿@{
+    // Set the page title
+    ViewData["Title"] = "Learn More";
+}
+
+@* Include FontAwesome for icons *@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+<div class="container mt-4">
+    @* Page header *@
+    <h1 class="mb-4">Learn More About Green Energy</h1>
+
+    @* Bootstrap accordion for dropdown sections *@
+    <div class="accordion" id="greenEnergyAccordion">
+
+        @* Grains section *@
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingGrains">
+                <button class="accordion-button collapsed" type="button"
+                        data-bs-toggle="collapse" data-bs-target="#collapseGrains"
+                        aria-expanded="false" aria-controls="collapseGrains">
+                    <i class="fas fa-seedling me-2"></i>Grains
+                </button>
+            </h2>
+            <div id="collapseGrains" class="accordion-collapse collapse"
+                 aria-labelledby="headingGrains" data-bs-parent="#greenEnergyAccordion">
+                <div class="accordion-body">
+                    <p>Grains improve soil health by retaining moisture and preventing erosion. AgriEnergyConnect partners with farmers to deploy solar-powered irrigation systems that optimise water usage.</p>
+                    <a href="https://www.fao.org/markets-and-trade/commodities-overview/basic-foods/grains/en" target="_blank" rel="noopener">Learn more at FAO</a>
+                </div>
+            </div>
+        </div>
+
+        @* Solar Energy section *@
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingSolar">
+                <button class="accordion-button collapsed" type="button"
+                        data-bs-toggle="collapse" data-bs-target="#collapseSolar"
+                        aria-expanded="false" aria-controls="collapseSolar">
+                    <i class="fas fa-sun me-2"></i>Solar Energy
+                </button>
+            </h2>
+            <div id="collapseSolar" class="accordion-collapse collapse"
+                 aria-labelledby="headingSolar" data-bs-parent="#greenEnergyAccordion">
+                <div class="accordion-body">
+                    <p>Solar energy reduces reliance on fossil fuels and cuts greenhouse gas emissions. AgriEnergyConnect installs photovoltaic panels on farms to power equipment and feed excess back to the grid.</p>
+                    <a href="https://www.iea.org/energy-system/renewables/solar-pv" target="_blank" rel="noopener">Learn more at IEA</a>
+                </div>
+            </div>
+        </div>
+
+        @* Wind Energy section *@
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingWind">
+                <button class="accordion-button collapsed" type="button"
+                        data-bs-toggle="collapse" data-bs-target="#collapseWind"
+                        aria-expanded="false" aria-controls="collapseWind">
+                    <i class="fas fa-wind me-2"></i>Wind Energy
+                </button>
+            </h2>
+            <div id="collapseWind" class="accordion-collapse collapse"
+                 aria-labelledby="headingWind" data-bs-parent="#greenEnergyAccordion">
+                <div class="accordion-body">
+                    <p>Wind turbines generate clean power without water usage. AgriEnergyConnect collaborates on small-scale turbines to supply remote farms.</p>
+                    <a href="https://gwec.net/" target="_blank" rel="noopener">Learn more at GWEC</a>
+                </div>
+            </div>
+        </div>
+
+        @* Biogas section *@
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingBiogas">
+                <button class="accordion-button collapsed" type="button"
+                        data-bs-toggle="collapse" data-bs-target="#collapseBiogas"
+                        aria-expanded="false" aria-controls="collapseBiogas">
+                    <i class="fas fa-leaf me-2"></i>Biogas
+                </button>
+            </h2>
+            <div id="collapseBiogas" class="accordion-collapse collapse"
+                 aria-labelledby="headingBiogas" data-bs-parent="#greenEnergyAccordion">
+                <div class="accordion-body">
+                    <p>Biogas captures methane from organic waste, turning it into usable energy. AgriEnergyConnect integrates digesters on farms to reduce waste and supply local energy.</p>
+                    <a href="https://www.ipcc.ch/srccl/" target="_blank" rel="noopener">Learn more at IPCC</a>
+                </div>
+            </div>
+        </div>
+
+        @* Water Energy section *@
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingWater">
+                <button class="accordion-button collapsed" type="button"
+                        data-bs-toggle="collapse" data-bs-target="#collapseWater"
+                        aria-expanded="false" aria-controls="collapseWater">
+                    <i class="fas fa-water me-2"></i>Water Energy
+                </button>
+            </h2>
+            <div id="collapseWater" class="accordion-collapse collapse"
+                 aria-labelledby="headingWater" data-bs-parent="#greenEnergyAccordion">
+                <div class="accordion-body">
+                    <p>Water energy harnesses flowing or falling water via turbines to generate clean electricity. AgriEnergyConnect supports micro-hydro installations on farms near streams, supplying dependable off-grid power.</p>
+                    <a href="https://www.hydropower.org/" target="_blank" rel="noopener">Learn more at IHA</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
